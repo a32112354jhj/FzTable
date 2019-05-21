@@ -131,7 +131,14 @@ body {
 
           .price {
             color: #444;
-            margin-right: 5px;
+            // margin-right: 5px;
+            
+            &:after{
+              content:'起';
+              display: inline-block;
+              margin-left: 5px;
+              color: #999;
+            }
           }
 
           label {
@@ -153,6 +160,10 @@ body {
               border-right: 10px solid transparent;
               border-bottom: 10px solid transparent;
               border-left: 10px solid #ff8e26;
+            }
+            &:before{
+              content: "最便宜";
+
             }
           }
         }
@@ -198,11 +209,15 @@ body {
         z-index: 1;
         color: #fff;
         border: none;
+        z-index: 1;
         &.slide_left {
           left: 0;
         }
         &.slide_right {
           right: 0;
+        }
+        &.btn_hide{
+          display: none;
         }
       }
       .scroll_box {

@@ -6,11 +6,12 @@ export default class App extends Component {
 
   show = 3; //顯示數量
   slide = 1; //滑動格數
-  btn_show = ['btn_show', 'btn_hide'];
-  
+  btn_show = ['btn_hide', 'btn_show'];//按鈕狀態class
+
   state = {
-    scroll_position: 0,
-    box_size: 0,
+    scroll_position: 0, //捲動框位置
+    btn_l_status: 1, //左按鈕狀態
+    btn_r_status: 0, //右按鈕狀態
     scroll_style: {
       transition: this.props.speed + 's',
       left: 0 + '%'
@@ -46,19 +47,32 @@ export default class App extends Component {
 
     if (this.show == 4 && scroll_position <= -75) {
       scroll_position = -75;
+      this.setState({
+        btn_l_status: 0
+      });
     }
     else if (this.show == 3 && scroll_position <= -133.333) {
       scroll_position = -133.333;
+      this.setState({
+        btn_l_status: 0
+      });
     }
     else if (this.show == 2 && scroll_position <= -250) {
       scroll_position = -250;
+      this.setState({
+        btn_l_status: 0
+      });
     }
     else if (this.show == 1 && scroll_position <= -600) {
       scroll_position = -600;
+      this.setState({
+        btn_l_status: 0
+      });
     }
 
     this.setState({
       scroll_position: scroll_position,
+      btn_r_status: 1,
       scroll_style: {
         transition: this.props.speed + 's',
         left: scroll_position + '%',
@@ -71,10 +85,14 @@ export default class App extends Component {
 
     if (scroll_position >= 0) {
       scroll_position = 0;
+      this.setState({
+        btn_r_status: 0,
+      });
     }
 
     this.setState({
       scroll_position: scroll_position,
+      btn_l_status: 1,
       scroll_style: {
         transition: this.props.speed + 's',
         left: scroll_position + '%',
@@ -103,11 +121,11 @@ export default class App extends Component {
           {/* 右框 */}
           <div className="right_box">
             {/* 左按鈕 */}
-            <button type="button" className="slide_left slide_btn" onClick={this.slideLeft}>
+            <button type="button" className={"slide_left slide_btn " + this.btn_show[this.state.btn_l_status]} onClick={this.slideLeft}>
               <i className="fas fa-chevron-left"></i>
             </button>
             {/* 右按鈕 */}
-            <button type="button" className="slide_right slide_btn" onClick={this.slideRight}>
+            <button type="button" className={"slide_right slide_btn " + this.btn_show[this.state.btn_r_status]} onClick={this.slideRight}>
               <i className="fas fa-chevron-right"></i>
             </button>
 
@@ -126,282 +144,276 @@ export default class App extends Component {
                 <div className="row cfx">
                   <div className="col1" onClick={(e) => this.props.whenClick(e.currentTarget)}>— —</div>
                   <div className="col2" onClick={(e) => this.props.whenClick(e.currentTarget)}>
-                    <label>最便宜</label>
+                    <label></label>
                     <span className="price">
                       $15,568
                   </span>
-                    起
-              </div>
+                  </div>
                   <div className="col3">
                     <span className="price">
                       $15,568
                  </span>
-                    起
-              </div>
+                  </div>
                   <div className="col4">
                     <span className="price">
                       $15,568
-                </span>
-                    起
-              </div>
+                    </span>
+                  </div>
                   <div className="col5">
                     <span className="price">
                       $15,568
-                </span>
-                    起
-              </div>
+                    </span>
+                  </div>
                   <div className="col6">
                     <span className="price">
                       $15,568
-                </span>
-                    起
-              </div>
+                    </span>
+                  </div>
                   <div className="col7">
                     <span className="price">
                       $15,568
-                </span>
-                    起
-                </div>
+                    </span>
+                  </div>
                 </div>
                 <div className="row cfx">
                   <div className="col1">查看</div>
                   <div className="col2">
-                    <label>最便宜</label>
+                    <label></label>
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col3">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col4">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col5">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div>
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div>
                     <span className="price">
                       $15,568
                 </span>
-                    起
-                </div>
+
+                  </div>
                 </div>
                 <div className="row cfx">
                   <div className="col1">查看</div>
                   <div className="col2">
-                    <label>最便宜</label>
+                    <label></label>
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col3">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col4">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col5">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col6">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col7">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-                </div>
+
+                  </div>
                 </div>
                 <div className="row cfx">
                   <div className="col1">— —</div>
                   <div className="col2">
-                    <label>最便宜</label>
+                    <label></label>
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col3">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col4">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col5">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col6">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col7">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-                </div>
+
+                  </div>
                 </div>
                 <div className="row cfx">
                   <div className="col1">— —</div>
                   <div className="col2">
-                    <label>最便宜</label>
+                    <label></label>
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col3">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col4">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col5">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col6">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col7">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-                </div>
+
+                  </div>
                 </div>
                 <div className="row cfx">
                   <div className="col1">— —</div>
                   <div className="col2">
-                    <label>最便宜</label>
+                    <label></label>
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col3">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col4">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col5">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col6">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col7">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-                </div>
+
+                  </div>
                 </div>
                 <div className="row cfx">
                   <div className="col1">— —</div>
                   <div className="col2">
-                    <label>最便宜</label>
+                    <label></label>
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col3">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col4">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col5">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col6">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-              </div>
+
+                  </div>
                   <div className="col7">
                     <span className="price">
                       $15,568
                 </span>
-                    起
-                </div>
+
+                  </div>
                 </div>
               </div>
             </div>

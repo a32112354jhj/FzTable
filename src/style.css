@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .cfx:before,
 .cfx:after {
   content: "";
@@ -145,7 +146,13 @@ body {
 
 .fz_table_box .right_box .content_box .row div .price {
   color: #444;
-  margin-right: 5px;
+}
+
+.fz_table_box .right_box .content_box .row div .price:after {
+  content: '起';
+  display: inline-block;
+  margin-left: 5px;
+  color: #999;
 }
 
 .fz_table_box .right_box .content_box .row div label {
@@ -169,6 +176,10 @@ body {
   border-right: 10px solid transparent;
   border-bottom: 10px solid transparent;
   border-left: 10px solid #ff8e26;
+}
+
+.fz_table_box .right_box .content_box .row div label:before {
+  content: "最便宜";
 }
 
 @media screen and (min-width: 768px) {
@@ -203,12 +214,16 @@ body {
     z-index: 1;
     color: #fff;
     border: none;
+    z-index: 1;
   }
   .fz_table_box .right_box .slide_btn.slide_left {
     left: 0;
   }
   .fz_table_box .right_box .slide_btn.slide_right {
     right: 0;
+  }
+  .fz_table_box .right_box .slide_btn.btn_hide {
+    display: none;
   }
   .fz_table_box .right_box .scroll_box {
     position: absolute;
