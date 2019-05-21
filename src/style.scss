@@ -144,7 +144,11 @@ body {
           .price {
             color: #444;
             // margin-right: 5px;
-            
+            &:before{
+              content:'\0024';
+              display: inline-block;
+              color: #444;
+            }
             &:after{
               content:'起';
               display: inline-block;

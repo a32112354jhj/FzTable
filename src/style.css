@@ -153,6 +153,12 @@ body {
   color: #444;
 }
 
+.fz_table_box .right_box .content_box .row div .price:before {
+  content: '\0024';
+  display: inline-block;
+  color: #444;
+}
+
 .fz_table_box .right_box .content_box .row div .price:after {
   content: '起';
   display: inline-block;
