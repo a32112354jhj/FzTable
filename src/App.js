@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './style.css';
+import Data from './tripData.json';
+import classNames from 'classnames';
 
 export default class App extends Component {
 
@@ -12,6 +13,8 @@ export default class App extends Component {
     scroll_position: 0, //捲動框位置
     btn_l_status: 1, //左按鈕狀態
     btn_r_status: 0, //右按鈕狀態
+    point_x:0, //點擊x
+    point_y:0, //點擊y
     scroll_style: {
       transition: this.props.speed + 's',
       left: 0 + '%'
@@ -43,6 +46,7 @@ export default class App extends Component {
 
   // 按鈕動作
   slideLeft = () => {
+
     let scroll_position = this.state.scroll_position - (100 / this.show) * this.slide;
 
     if (this.show == 4 && scroll_position <= -75) {
@@ -100,8 +104,17 @@ export default class App extends Component {
     });
   }
 
+  handleClick = (x,y, e) => {
+
+    this.setState({
+      point_x:x,
+      point_y:y
+    });
+    this.props.whenClick(e.currentTarget);
+  }
 
   render() {
+    let DDate = Data.data;
     return (
       <div className="App">
         <div className={"fz_table_box cfx" + " mob_" + this.show}>
@@ -110,13 +123,25 @@ export default class App extends Component {
               <span>回程</span>
               <span>去程</span>
             </div>
-            <div><span className="day">12/27(一)</span></div>
+
+            {
+              DDate.map((item, idx) => {
+                item.data.map(() => {
+                })
+                return <div key={idx}><span className="day">{item.date_year && <i>2019</i>}{item["date"]}</span></div>
+              })
+
+            }
+
+
+            {/* <div><span className="day">12/27(一)</span></div>
             <div><span className="day">12/28(二)</span></div>
             <div><span className="day">12/29(三)</span></div>
             <div><span className="day">12/30(四)</span></div>
             <div><span className="day">12/31(五)</span></div>
             <div><span className="day"><i>2018</i>01/01(六)</span></div>
-            <div><span className="day">01/02(日)</span></div>
+            <div><span className="day">01/02(日)</span></div> */}
+
           </div>
           {/* 右框 */}
           <div className="right_box">
@@ -137,287 +162,31 @@ export default class App extends Component {
                 <div><span className="day">12/29(三)</span></div>
                 <div><span className="day">12/30(四)</span></div>
                 <div><span className="day">12/31(五)</span></div>
-                <div><span className="day"><i>2018</i>01/01(六)</span></div>
+                <div><span className="day"><i>2019</i>01/01(六)</span></div>
                 <div><span className="day">01/02(日)</span></div>
               </div>
+
               <div className="content_box">
                 <div className="row cfx">
-                  <div className="col1" onClick={(e) => this.props.whenClick(e.currentTarget)}>— —</div>
-                  <div className="col2" onClick={(e) => this.props.whenClick(e.currentTarget)}>
-                    <label></label>
-                    <span className="price">
-                      $15,568
-                  </span>
-                  </div>
-                  <div className="col3">
-                    <span className="price">
-                      $15,568
-                 </span>
-                  </div>
-                  <div className="col4">
-                    <span className="price">
-                      $15,568
-                    </span>
-                  </div>
-                  <div className="col5">
-                    <span className="price">
-                      $15,568
-                    </span>
-                  </div>
-                  <div className="col6">
-                    <span className="price">
-                      $15,568
-                    </span>
-                  </div>
-                  <div className="col7">
-                    <span className="price">
-                      $15,568
-                    </span>
-                  </div>
-                </div>
-                <div className="row cfx">
-                  <div className="col1">查看</div>
-                  <div className="col2">
-                    <label></label>
-                    <span className="price">
-                      $15,568
-                </span>
+                
+                  { 
+                    DDate.map((item, key)=> {
+                      return item.data.map((row, key2)=> {
+                        return (
+                          <div key={key2} className={classNames("col"+(key2+1)+" row"+(key+1),{active: key === this.state.point_x || key2 === this.state.point_y},{point: key === this.state.point_x && key2 === this.state.point_y})} onClick={(e) => this.handleClick(key,key2,e)}>
+                            {row.isTheCheapest &&<label></label>}
 
-                  </div>
-                  <div className="col3">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col4">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col5">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div>
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div>
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                </div>
-                <div className="row cfx">
-                  <div className="col1">查看</div>
-                  <div className="col2">
-                    <label></label>
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col3">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col4">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col5">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col6">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col7">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                </div>
-                <div className="row cfx">
-                  <div className="col1">— —</div>
-                  <div className="col2">
-                    <label></label>
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col3">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col4">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col5">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col6">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col7">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                </div>
-                <div className="row cfx">
-                  <div className="col1">— —</div>
-                  <div className="col2">
-                    <label></label>
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col3">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col4">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col5">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col6">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col7">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                </div>
-                <div className="row cfx">
-                  <div className="col1">— —</div>
-                  <div className="col2">
-                    <label></label>
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col3">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col4">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col5">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col6">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col7">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                </div>
-                <div className="row cfx">
-                  <div className="col1">— —</div>
-                  <div className="col2">
-                    <label></label>
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col3">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col4">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col5">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col6">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
-                  <div className="col7">
-                    <span className="price">
-                      $15,568
-                </span>
-
-                  </div>
+                            <span className={isNaN(row.price) ?　'' : "price"}>{row.price}</span>
+                            </div>
+                        )
+                      })
+                      
+                    })
+                  }
+                                
                 </div>
               </div>
             </div>
-
 
           </div>
         </div>
@@ -428,4 +197,4 @@ export default class App extends Component {
 }
 
 
-// export default App;
+    // export default App;

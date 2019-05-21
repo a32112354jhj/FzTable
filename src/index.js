@@ -7,15 +7,16 @@ import * as serviceWorker from './serviceWorker';
 ReactDOM.render(<App 
     count= {{
         // M版時每次點擊往前往後移動幾格儲存格
-        slide: 3, // [number] 
+        slide: 1, // [number] 
         // M版時一個畫面show幾格儲存格
-        show: 2 // [number] 
+        show: 3 // [number] 
     }}
     // 設定花多久時間移動完成
-    speed= {.5} // [number] 
+    speed= {.3} // [number] 
     // 每次點擊儲存格時會執行此callback，並帶入所點擊的儲存格jquery物件
     whenClick={ (elem) => {
         console.log(elem.className);
+        
     }}
 />, document.getElementById('root'));
 

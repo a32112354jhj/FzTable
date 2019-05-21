@@ -98,10 +98,6 @@ body {
           box-sizing: border-box;
 }
 
-.fz_table_box .right_box .top_title div:last-child {
-  border-right: none;
-}
-
 .fz_table_box .right_box .top_title div .day {
   position: relative;
 }
@@ -135,7 +131,16 @@ body {
   color: #999;
 }
 
-.fz_table_box .right_box .content_box .row div:last-child {
+.fz_table_box .right_box .content_box .row div.active {
+  background-color: #f7f7f7;
+}
+
+.fz_table_box .right_box .content_box .row div.point {
+  background: #fff9e3;
+  border: 1px solid #fe8b88;
+}
+
+.fz_table_box .right_box .content_box .row div:nth-child(7n) {
   border-right: 0px;
 }
 
