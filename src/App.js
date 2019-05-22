@@ -15,6 +15,7 @@ export default class App extends Component {
     btn_r_status: 1, //右按鈕狀態
     point_x: 0, //點擊x
     point_y: 0, //點擊y
+    speed:0,
     scroll_style: {
       transition: this.props.speed + 's',
       left: 0 + '%'
@@ -24,6 +25,9 @@ export default class App extends Component {
 
   constructor(props) {
     super(props);
+    
+    // 移動速度
+    this.state.speed = typeof (props.count.speed) !== 'undefined' ? props.count.speed : this.state.speed;
 
     // 移動格數
     this.slide = typeof (props.count.slide) !== 'undefined' ? props.count.slide : this.slide;
@@ -104,7 +108,7 @@ export default class App extends Component {
     });
   }
 
-
+  // 點選內容
   handleClick = (x, y, e) => {
     this.setState({
       point_x: x,
@@ -112,11 +116,13 @@ export default class App extends Component {
     });
     this.props.whenClick(e.currentTarget);
   }
-  
 
+  
   render() {
     let tripData = Data.data;
+
     return (
+      
       <div className="App">
         <div className={"fz_table_box cfx" + " mob_" + this.show}>
           <div className="left_box">
@@ -126,7 +132,7 @@ export default class App extends Component {
             </div>
 
             {
-              // 日期直
+              // 日期(直)
               tripData.map((item, key) => {
                 return <div><span className="day">{item.date_year && <i>{item.date_year}</i>}{item.date}</span></div>
               })
@@ -146,26 +152,29 @@ export default class App extends Component {
 
             <div className="scroll_box" style={this.state.scroll_style}>
 
-              {/* 日期橫 */
+              {/* 日期(橫) */
                 tripData.map((item, key) => {
                   return (
                     <div className="top_title">
                       <div><span className="day">{item.date_year && <i>{item.date_year}</i>}{item.date}</span></div>
                     </div>
                   )
-
                 })
               }
 
-
+              {/* 表格內容 */}
               <div className="content_box">
                 <div className="row cfx">
-
                   {
                     tripData.map((item, key) => {
                       return item.data.map((row, key2) => {
                         return (
-                          <div key={key2} className={classNames("col" + (key2 + 1) + " row" + (key + 1), { active: key === this.state.point_x || key2 === this.state.point_y }, { point: key === this.state.point_x && key2 === this.state.point_y })} onClick={(e) => this.handleClick(key, key2, e)}>
+                          <div key={key2} className={
+                            classNames("col" + (key2 + 1) + " row" + (key + 1),
+                              { active: key === this.state.point_x || key2 === this.state.point_y },
+                              { point: key === this.state.point_x && key2 === this.state.point_y })}
+                            onClick={(e) => this.handleClick(key, key2, e)}>
+
                             {row.isTheCheapest && <label></label>}
                             <span className={isNaN(row.price) ? '' : "price"}>{row.price.toLocaleString()}</span>
                           </div>
@@ -174,9 +183,9 @@ export default class App extends Component {
 
                     })
                   }
-
                 </div>
               </div>
+
             </div>
 
           </div>

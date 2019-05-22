@@ -16,7 +16,6 @@ ReactDOM.render(<App
     // 每次點擊儲存格時會執行此callback，並帶入所點擊的儲存格jquery物件
     whenClick={ (elem) => {
         console.log(elem.className);
-        
     }}
 />, document.getElementById('root'));
 
