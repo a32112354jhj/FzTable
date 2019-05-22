@@ -16,6 +16,7 @@ export default class App extends Component {
     point_x: 0, //點擊x
     point_y: 0, //點擊y
     speed:0,    //速度
+    //scroll樣式
     scroll_style: {
       transition: this.speed + 's',
       left: 0 + '%'
@@ -117,8 +118,8 @@ export default class App extends Component {
     this.props.whenClick(e.currentTarget);
   }
 
+  // RESIZE
   resizeSpeed = ()=>{
-
     this.setState({...this.state,
       scroll_style: {
         ...this.state.scroll_style,
@@ -127,7 +128,7 @@ export default class App extends Component {
     });
   }
 
-  
+
   componentDidMount() {
     window.addEventListener("resize", this.resizeSpeed);
   }
@@ -137,7 +138,6 @@ export default class App extends Component {
     let tripData = Data.data;
 
     return (
-      
       <div className="App">
         <div className={"fz_table_box cfx" + " mob_" + this.show}>
           <div className="left_box">
@@ -208,8 +208,5 @@ export default class App extends Component {
       </div>
     );
   }
-
 }
 
-
-    // export default App;
