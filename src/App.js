@@ -17,7 +17,7 @@ export default class App extends Component {
     point_y: 0, //點擊y
     speed:0,
     scroll_style: {
-      transition: this.props.speed + 's',
+      transition: this.speed + 's',
       left: 0 + '%'
     }
   }
@@ -27,7 +27,7 @@ export default class App extends Component {
     super(props);
     
     // 移動速度
-    this.state.speed = typeof (props.count.speed) !== 'undefined' ? props.count.speed : this.state.speed;
+    this.state.speed = typeof (props.speed) !== 'undefined' ? props.speed : this.state.speed;
 
     // 移動格數
     this.slide = typeof (props.count.slide) !== 'undefined' ? props.count.slide : this.slide;
@@ -82,7 +82,7 @@ export default class App extends Component {
       scroll_position: scroll_position,
       btn_l_status: 1,
       scroll_style: {
-        transition: this.props.speed + 's',
+        transition: this.state.speed + 's',
         left: scroll_position + '%',
       }
     });
@@ -102,7 +102,7 @@ export default class App extends Component {
       scroll_position: scroll_position,
       btn_r_status: 1,
       scroll_style: {
-        transition: this.props.speed + 's',
+        transition: this.state.speed + 's',
         left: scroll_position + '%',
       }
     });
@@ -115,6 +115,21 @@ export default class App extends Component {
       point_y: y
     });
     this.props.whenClick(e.currentTarget);
+  }
+
+  resizeSpeed = ()=>{
+
+    this.setState({...this.state,
+      scroll_style: {
+        ...this.state.scroll_style,
+        transition: 0 + 's'
+      }
+    });
+    
+  }
+
+  componentDidMount() {
+    window.addEventListener("resize", this.resizeSpeed);
   }
 
   
@@ -134,7 +149,7 @@ export default class App extends Component {
             {
               // 日期(直)
               tripData.map((item, key) => {
-                return <div><span className="day">{item.date_year && <i>{item.date_year}</i>}{item.date}</span></div>
+                return <div key={key}><span className="day">{item.date_year && <i>{item.date_year}</i>}{item.date}</span></div>
               })
             }
 
@@ -155,7 +170,7 @@ export default class App extends Component {
               {/* 日期(橫) */
                 tripData.map((item, key) => {
                   return (
-                    <div className="top_title">
+                    <div className="top_title" key={key}>
                       <div><span className="day">{item.date_year && <i>{item.date_year}</i>}{item.date}</span></div>
                     </div>
                   )

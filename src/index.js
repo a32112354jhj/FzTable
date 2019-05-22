@@ -7,9 +7,9 @@ import * as serviceWorker from './serviceWorker';
 ReactDOM.render(<App 
     count= {{
         // M版時每次點擊往前往後移動幾格儲存格
-        slide: 1, // [number] 
+        slide: 2, // [number] 
         // M版時一個畫面show幾格儲存格
-        show: 3 // [number] 
+        show: 2 // [number] 
     }}
     // 設定花多久時間移動完成
     speed= {.3} // [number] 
