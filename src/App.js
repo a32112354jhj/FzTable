@@ -11,11 +11,11 @@ export default class App extends Component {
 
   state = {
     scroll_position: 0, //捲動框位置
-    btn_l_status: 0, //左按鈕狀態
-    btn_r_status: 1, //右按鈕狀態
+    btn_l_status: 0,    //左按鈕狀態
+    btn_r_status: 1,    //右按鈕狀態
     point_x: 0, //點擊x
     point_y: 0, //點擊y
-    speed:0,
+    speed:0,    //速度
     scroll_style: {
       transition: this.speed + 's',
       left: 0 + '%'
@@ -48,9 +48,8 @@ export default class App extends Component {
     }
   }
 
-  // 按鈕動作
+  // 按鈕動作(左)
   slideLeft = () => {
-
     let scroll_position = this.state.scroll_position - (100 / this.show) * this.slide;
 
     if (this.show == 4 && scroll_position <= -75) {
@@ -88,6 +87,7 @@ export default class App extends Component {
     });
   }
 
+  // 按鈕動作(右)
   slideRight = () => {
     let scroll_position = this.state.scroll_position + (100 / this.show) * this.slide;
 
@@ -125,9 +125,9 @@ export default class App extends Component {
         transition: 0 + 's'
       }
     });
-    
   }
 
+  
   componentDidMount() {
     window.addEventListener("resize", this.resizeSpeed);
   }
